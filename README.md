@@ -1,7 +1,7 @@
 ## CS-280-Projects bob
 
 [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://xxlooped79.github.io/CS-280-Projects/)
-[![GitHub Actions CI] (https://github.com/xxlooped79/CS-280-Projects/actions/workflows/CI.yml/badge.svg)](https://github.com/xxlooped79/CS-280-Projects/actions/workflows/CI.yml?query=branch%3Amain)
+[![GitHub Actions CI](https://github.com/xxlooped79/CS-280-Projects/actions/workflows/CI.yml/badge.svg)](https://github.com/xxlooped79/CS-280-Projects/actions/workflows/CI.yml?query=branch%3Amain)
 
 This is the starter package for the Holy Cross College CS 280 Data Structures course.
 
