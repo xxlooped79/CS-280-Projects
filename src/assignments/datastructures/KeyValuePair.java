@@ -16,16 +16,16 @@ import adt.OrderedPair;
 /// 2. In the first Wednesday, we will use this class as a model to understand how variables and objects are represented in memory.
 /// 3. In the first weekend, we will learn how to adapt this class to use "generics".
 /// 4. Later on, we will use this class to implement a *Map*, a data structure similar to Python's `dict`.
-public class KeyValuePair implements OrderedPair {
-    private String key;
-    private Integer value;
+public class KeyValuePair<K, V> implements OrderedPair<K, V> {
+    private K key;
+    private V value;
 
     /**
      * Initialize a key-value pair.
      * @param key the key (immutable)
      * @param value the value (may be changed later)
      */
-    public KeyValuePair(String key, Integer value) {
+    public KeyValuePair(K key, V value) {
         this.key = key;
         this.value = value;
     }
@@ -34,7 +34,7 @@ public class KeyValuePair implements OrderedPair {
      * Extract the key from the key-value pair.
      * @return the key
      */
-    public String first() {
+    public K first() {
         return this.key;
     }
 
@@ -42,7 +42,7 @@ public class KeyValuePair implements OrderedPair {
      * Extract the value from the key-value pair.
      * @return the value
      */
-    public Integer second() {
+    public V second() {
         return this.value;
     }
 
@@ -56,24 +56,33 @@ public class KeyValuePair implements OrderedPair {
      * Note that the ordered pair interface does not require us to return an ordered pair of the same type.
      * Any object implementing the `OrderedPair` interface will do.
      * So one solution would be to go through the effort of defining a `ValueKeyPair` class from scratch,
-     *  and for this `reversed` method to return an object of that class.
+     * and for this `reversed` method to return an object of that class.
      * 
      * But this isn't a great solution, because a `ValueKeyPair` is not useful for anything other than this single method.
      * Instead, we can use an *anonymous class*,
-     *  defining a minimal custom behavior for a so-called ValueKeyPair from within the `reversed` method itself.
+     * defining a minimal custom behavior for a so-called ValueKeyPair from within the `reversed` method itself.
      * 
      * This design pattern is common whenever you need to implement a method which specifies an abstract return type.
      * We will see it again when we learn about iterators.
      * 
      * @return a new ordered pair
      */
-    public OrderedPair reversed() {
-        return new OrderedPair() {
-            Integer v = value;
-            String k = key;
-            public Integer first() {return this.v;}
-            public String second() {return this.k;}
-            public OrderedPair reversed() {return new KeyValuePair(this.k, this.v);}
+    public OrderedPair<V, K> reversed() {
+        return new OrderedPair<V, K>() {
+            V v = value;
+            K k = key;
+
+            public V first() {
+                return this.v;
+            }
+
+            public K second() {
+                return this.k;
+            }
+
+            public OrderedPair<K, V> reversed() {
+                return new KeyValuePair<K, V>(this.k, this.v);
+            }
         };
     }
 
@@ -81,7 +90,7 @@ public class KeyValuePair implements OrderedPair {
      * Replace the value in the key-value pair.
      * @param value the new value
      */
-    public void setValue(Integer value) {
+    public void setValue(V value) {
         this.value = value;
     }
 
@@ -90,7 +99,7 @@ public class KeyValuePair implements OrderedPair {
      * @return "{key} => {pair}"
      */
     public String toString() {
-        return this.key.toString()+" => "+this.value.toString();
+        return this.key.toString() + " => " + this.value.toString();
     }
 
     /**
@@ -102,7 +111,12 @@ public class KeyValuePair implements OrderedPair {
      * @return true iff o is a key-value pair and its key equals that of this key-value pair
      */
     public boolean equals(Object o) {
-        return (o instanceof KeyValuePair) && this.key.equals(((KeyValuePair)o).key);
+        if (!(o instanceof KeyValuePair)) {
+            return false;
+        }
+
+        KeyValuePair<?, ?> other = (KeyValuePair<?, ?>) o;
+        return this.key.equals(other.key);
     }
 
     /**
@@ -128,10 +142,11 @@ public class KeyValuePair implements OrderedPair {
      * @param args command-line args
      */
     public static void main(String[] args) {
-        OrderedPair.validate(new KeyValuePair("", 0));
+        OrderedPair.validate(new KeyValuePair<>("", 0));
 
         // Create a specific key-value pair to test with.
-        KeyValuePair pair = new KeyValuePair("disciples", 12);
+        KeyValuePair<String, Integer> pair =
+            new KeyValuePair<>("disciples", 12);
 
         // Test that we can mutate the value.
         assert pair.second().equals(12);
@@ -143,10 +158,9 @@ public class KeyValuePair implements OrderedPair {
         assert pair.hashCode() == "disciples".hashCode();
 
         // Test that equality is based on key but not on value.
-        assert pair.equals(new KeyValuePair("disciples", 12));
-        assert !pair.equals(new KeyValuePair("apostles", 11));
+        assert pair.equals(new KeyValuePair<>("disciples", 12));
+        assert !pair.equals(new KeyValuePair<>("apostles", 11));
 
         System.out.println("KeyValuePair passes all tests.");
     }
-    
 }
