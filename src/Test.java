@@ -32,6 +32,8 @@ public class Test {
         Bubblesort.main(args);
         // Test data structures.
         KeyValuePair.main(args);
+        SelectionSort.main(args);
+        InsertionSort.main(args);
         /* Call additional main routines as you create new data strutures. */
 
         return true;
