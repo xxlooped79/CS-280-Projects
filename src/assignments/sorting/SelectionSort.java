@@ -4,40 +4,36 @@ package assignments.sorting;
  * Find the smallest element and move it into its correct
  * position until the whole array is sorted.
  */
-public class SelectionSort extends SortingAlgorithm
+public class SelectionSort<T extends Comparable<T>> extends SortingAlgorithm<T>
 {
     /**
      * Sort an array in-place using selection sort.
      *
      * Post-condition: 'array' is sorted in ascending order.
      *
-     * @param array an array of integers
+     * @param array the array to sort
      */
-    public void sort(Integer[] array)
+    @Override
+    public void sort(T[] array)
     {
         // Go through each position in the array.
-        // The last position does not need to be checked
-        // because the remaining elements will already be sorted.
         for (int i = 0; i < array.length - 1; i++)
         {
             // Assume the current position contains
             // the smallest element.
             int minIndex = i;
 
-            // Search the unsorted portion of the array
-            // for an element smaller than the current minimum.
+            // Search the unsorted portion of the array.
             for (int j = i + 1; j < array.length; j++)
             {
-                // If a smaller element is found,
-                // remember its index.
-                if (array[j] < array[minIndex])
+                // Compare generic elements.
+                if (array[j].compareTo(array[minIndex]) < 0)
                 {
                     minIndex = j;
                 }
             }
 
-            // Swap the smallest element found with
-            // the element at the current position.
+            // Swap the smallest element into position.
             swap(array, i, minIndex);
         }
     }
@@ -49,23 +45,22 @@ public class SelectionSort extends SortingAlgorithm
      * @param i the first index to swap
      * @param j the second index to swap
      */
-    private void swap(Integer[] array, int i, int j)
+    private void swap(T[] array, int i, int j)
     {
-        // Temporarily store the first value.
-        Integer temp = array[i];
-
-        // Move the second value into the first position.
+        T temp = array[i];
         array[i] = array[j];
-
-        // Move the original first value into the second position.
         array[j] = temp;
     }
 
+    /**
+     * Default constructor.
+     */
+    public SelectionSort() {}
+
     public static void main(String[] args)
     {
-        // Test the SelectionSort implementation
-        // using the validation method from SortingAlgorithm.
-        SortingAlgorithm.validate(new SelectionSort());
+        // Test the SelectionSort implementation.
+        SortingAlgorithm.validate(new SelectionSort<Integer>());
 
         System.out.println("SelectionSort has passed all tests");
 
@@ -79,7 +74,7 @@ public class SelectionSort extends SortingAlgorithm
         }
 
         // Create a SelectionSort object.
-        SortingAlgorithm sorter = new SelectionSort();
+        SortingAlgorithm<Integer> sorter = new SelectionSort<Integer>();
 
         // Start measuring the runtime.
         long start = System.nanoTime();
@@ -91,7 +86,7 @@ public class SelectionSort extends SortingAlgorithm
         long end = System.nanoTime();
 
         // Convert the runtime from nanoseconds to seconds.
-        double duration = (end - start) / (1e9);
+        double duration = (end - start) / 1e9;
 
         System.out.println("Array size " + N);
         System.out.println("Total duration: " + duration);
