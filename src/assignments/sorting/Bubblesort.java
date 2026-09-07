@@ -3,7 +3,7 @@ package assignments.sorting;
 /**
  * Swap adjacent elements over and over until the whole array is sorted.
  */
-public class Bubblesort<T extends Comparable<T>> extends SortingAlgorithm<T>
+public class BubbleSort<T extends Comparable<T>> extends SortingAlgorithm<T>
 {
     /**
      * Sorting an array in-place using bubble sort.
@@ -47,11 +47,11 @@ public class Bubblesort<T extends Comparable<T>> extends SortingAlgorithm<T>
     /**
      * Default constructor.
      */
-    public Bubblesort() {}
+    public BubbleSort() {}
 
     public static void main(String[] args)
     {
-        SortingAlgorithm.validate(new Bubblesort<Integer>());
+        SortingAlgorithm.validate(new BubbleSort<Integer>());
         System.out.println("Bubblesort has passed all tests");
 
         // Fill an array with random numbers.
@@ -64,7 +64,7 @@ public class Bubblesort<T extends Comparable<T>> extends SortingAlgorithm<T>
         }
 
         // Measuring runtime.
-        SortingAlgorithm<Integer> sorter = new Bubblesort<Integer>();
+        SortingAlgorithm<Integer> sorter = new BubbleSort<Integer>();
 
         long start = System.nanoTime();
 
