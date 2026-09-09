@@ -18,7 +18,7 @@ public class EraDemo {
 
     public static void main(String[] args) {
         InsertionSort<Integer> sorter = new InsertionSort<>();
-        for (int N = 10; N < 100; N += 10) {
+        for (int N = 1000; N < 100000000; N *= 10) {
 
             Integer[] array = randomArray(N);
 
