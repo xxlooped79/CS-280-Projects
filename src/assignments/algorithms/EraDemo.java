@@ -1,4 +1,3 @@
-
 package assignments.algorithms;
 
 import assignments.sorting.InsertionSort;
