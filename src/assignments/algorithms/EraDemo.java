@@ -1,39 +1,63 @@
 package assignments.algorithms;
 
-import assignments.sorting.InsertionSort;
-
+/**
+ * Measures the time required to compute Fibonacci numbers
+ * using different algorithms.
+ */
 public class EraDemo {
 
-    private static Integer[] randomArray(int n) {
+    /**
+     * Measures how long a Fibonacci method takes to run.
+     *
+     * @param n Fibonacci index
+     * @return elapsed time in nanoseconds
+     */
+    private static long timeDynamic(int n) {
+        long start = System.nanoTime();
 
-        Integer[] array = new Integer[n];
+        DynamicFibonacci.fibonacci(n);
 
-        for (int i = 0; i < array.length; i++) {
-            array[i] = (int) (Math.random() * n);
-        }
+        long end = System.nanoTime();
 
-        return array;
+        return end - start;
+    }
+
+    private static long timeBinet(int n) {
+        long start = System.nanoTime();
+
+        BinetFibonacci.fibonacci(n);
+
+        long end = System.nanoTime();
+
+        return end - start;
+    }
+
+    private static long timeRecursive(int n) {
+        long start = System.nanoTime();
+
+        RecursiveFibonacci.fibonacci(n);
+
+        long end = System.nanoTime();
+
+        return end - start;
     }
 
     public static void main(String[] args) {
-        InsertionSort<Integer> sorter = new InsertionSort<>();
-        for (int N = 1000; N < 100000000; N *= 10) {
 
-            Integer[] array = randomArray(N);
+        System.out.println("N\tDynamic\tBinet\tRecursive");
 
+        for (int n = 1; n <= 40; n++) {
 
-            long start = System.nanoTime();
+            long dynamicTime = timeDynamic(n);
+            long binetTime = timeBinet(n);
+            long recursiveTime = timeRecursive(n);
 
-            sorter.sort(array);
-
-            long end = System.nanoTime();
-
-            double duration = (end - start) / 1e9;
-
-            System.out.println(N + "\t" + duration);
+            System.out.println(
+                n + "," +
+                dynamicTime + "," +
+                binetTime + "," +
+                recursiveTime
+            );
         }
     }
 }
-
-
-
