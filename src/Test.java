@@ -36,6 +36,8 @@ public class Test {
         SelectionSort.main(args);
         InsertionSort.main(args);
         Vector.main(args);
+        LinkedList.main(args);
+        
 
         /* Call additional main routines as you create new data strutures. */
 

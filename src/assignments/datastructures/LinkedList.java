@@ -1,6 +1,7 @@
 package assignments.datastructures;
 
 import adt.List;
+import java.util.Iterator;
 
 /// An extensible list backed by a chain of nodes.
 /// 
@@ -18,16 +19,25 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
     private Node head;
     private int size;
 
-    
-    public Iterator(T) iterator(0) {
+    /**
+     * Create an iterator that starts at the beginning of the list.
+     * @return an iterator over the list
+     */
+    public Iterator<T> iterator() {
         return new Iterator<T>() {
             Node cursor = head;
-            public boolean hasNext(){         }
-            public T next() {       }
-        }
 
+            public boolean hasNext() {
+                return cursor != null;
+            }
+
+            public T next() {
+                T value = cursor.data;
+                cursor = cursor.link;
+                return value;
+            }
+        };
     }
-     
 
     /**
      * Initialize an empty linked list.
@@ -42,9 +52,9 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
      * @return the number of items
      */
     public int length() {
-        return this.size; 
+        return this.size;
     }
-    
+
     /**
      * Fetch an item from the list.
      * @param index the location of the item - a nonnegative integer less than the length of the list
@@ -69,29 +79,35 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
      */
     public void set(int index, T value) {
         assert 0 <= index && index < this.size;
+
         Node current = this.head;
-        for (int i = 0; i < index; i++) { 
-            current = current.link; 
+
+        for (int i = 0; i < index; i++) {
+            current = current.link;
         }
+
         current.data = value;
     }
-    
+
     /**
      * Check if the list contains a given value.
      * @param value the value to look for
      * @return true iff the collection contains value
      */
     public boolean contains(T value) {
-        Node current = this.head; 
+        Node current = this.head;
+
         while (current != null) {
             if (current.data.equals(value)) {
                 return true;
             }
+
             current = current.link;
         }
+
         return false;
     }
-    
+
     /**
      * Insert an item into the list.
      * @param index the location of where to put the item - a nonnegative integer less than or equal to the length of the list
@@ -115,7 +131,6 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
         this.size++;
     }
 
-    
     /**
      * Remove an item from the list.
      * @param index the location to delete from - a nonnegative integer less than the length of the list
@@ -144,7 +159,7 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
 
         return value;
     }
-    
+
     /**
      * An encapsulation of a value with a pointer, allowing us to chain to another value.
      */
@@ -153,7 +168,7 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
         Node link;
 
         /**
-         * Initialize a node with no children.
+         * Initialize a node.
          * @param data the data value
          * @param link the next node in the chain
          */
