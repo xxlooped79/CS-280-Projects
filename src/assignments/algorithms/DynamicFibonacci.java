@@ -1,35 +1,26 @@
 package assignments.algorithms;
+
 /**
- * Computes Fibonacci numbers using dynamic programming.
+ * Compute Fibonacci numbers as described in Chapter 1.
  */
 public class DynamicFibonacci {
 
-    /**
-     * Computes the nth Fibonacci number using dynamic programming.
-     *
-     * @param n the Fibonacci index
-     * @return the nth Fibonacci number
-     */
-    public static long fibonacci(int n) {
+    public static int fibonacci(int n) {
 
-        if (n < 0) {
-            throw new IllegalArgumentException("n must be non-negative");
-        }
+        if (n <= 1)
+            return 1;
 
-        if (n <= 1) {
-            return n;
-        }
-
-        long[] values = new long[n + 1];
-
-        values[0] = 0;
-        values[1] = 1;
+        int last = 1;
+        int nextToLast = 1;
+        int answer = 1;
 
         for (int i = 2; i <= n; i++) {
-            values[i] = values[i - 1] + values[i - 2];
+            answer = last + nextToLast;
+            nextToLast = last;
+            last = answer;
         }
 
-        return values[n];
+        return answer;
     }
 
     public static void main(String[] args) {
