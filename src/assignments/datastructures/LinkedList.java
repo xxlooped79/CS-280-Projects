@@ -14,9 +14,20 @@ import adt.List;
 ///  one must first traverse through the chain of nodes from the beginning of the list.
 /// 
 /// @param <T> the type of each element
-public class LinkedList<T> implements List<T> {
+public class LinkedList<T> implements List<T>, Iterable<T> {
     private Node head;
     private int size;
+
+    
+    public Iterator(T) iterator(0) {
+        return new Iterator<T>() {
+            Node cursor = head;
+            public boolean hasNext(){         }
+            public T next() {       }
+        }
+
+    }
+     
 
     /**
      * Initialize an empty linked list.
