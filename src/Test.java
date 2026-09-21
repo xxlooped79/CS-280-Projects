@@ -1,7 +1,4 @@
-import assignments.algorithms.BinetFibonacci;
-import assignments.algorithms.DynamicFibonacci;
-import assignments.algorithms.EraDemo;
-import assignments.algorithms.RecursiveFibonacci;
+
 import assignments.datastructures.*;
 import assignments.sorting.*;
 
@@ -41,11 +38,6 @@ public class Test {
         InsertionSort.main(args);
         Vector.main(args);
         LinkedList.main(args);
-        DynamicFibonacci.main(args);
-        BinetFibonacci.main(args);
-        RecursiveFibonacci.main(args);
-        EraDemo.main(args);
-        
 
         /* Call additional main routines as you create new data strutures. */
 
