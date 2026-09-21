@@ -23,14 +23,17 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
      * Create an iterator that starts at the beginning of the list.
      * @return an iterator over the list
      */
+    @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
             Node cursor = head;
 
+            @Override
             public boolean hasNext() {
                 return cursor != null;
             }
 
+            @Override
             public T next() {
                 T value = cursor.data;
                 cursor = cursor.link;
@@ -184,6 +187,22 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
      */
     public static void main(String[] args) {
         List.validate(new LinkedList<>());
+
+        // Test iterator.
+        LinkedList<Integer> list = new LinkedList<>();
+
+        for (int i = 0; i < 5; i++) {
+            list.insert(0, i);
+        }
+
+        Iterator<Integer> iter = list.iterator();
+
+        for (int i = 5; i > 0; i--) {
+            assert iter.next().equals(i - 1);
+        }
+
+        assert !iter.hasNext();
+
         System.out.println("LinkedList passes all tests.");
     }
 }
