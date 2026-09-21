@@ -40,7 +40,7 @@ public class EraDemo {
 
     public static void main(String[] args) {
 
-        System.out.println("N\tDynamic\tBinet\tRecursive");
+        System.out.println("N,Dynamic,Binet,Recursive");
 
         for (int n = 1; n <= 40; n++) {
 
@@ -49,9 +49,9 @@ public class EraDemo {
             double recursiveTime = timeRecursive(n);
 
             System.out.println(
-                n + "\t" +
-                dynamicTime + "\t" +
-                binetTime + "\t" +
+                n + "," +
+                dynamicTime + "," +
+                binetTime + "," +
                 recursiveTime
             );
         }
