@@ -164,7 +164,7 @@ public class Vector<T> implements List<T>, Iterable<T> {
     public static void main(String[] args) {
         List.validate(new Vector<>());
 
-        // Test iterator.
+        
         Vector<Integer> vector = new Vector<>();
 
         for (int i = 0; i < INITIAL_BUFFER_SIZE; i++) {
