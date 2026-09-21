@@ -1,7 +1,7 @@
 package assignments.algorithms;
 
 /**
- * Compute Fibonacci numbers as described in Chapter 1.
+ * Compute Fibonacci numbers as described in Chapter 10
  */
 public class DynamicFibonacci {
 

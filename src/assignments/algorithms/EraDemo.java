@@ -1,45 +1,41 @@
 package assignments.algorithms;
 
-/**
- * Measures the time required to compute Fibonacci numbers
- * using different algorithms.
- */
 public class EraDemo {
 
-    /**
-     * Measures how long a Fibonacci method takes to run.
-     *
-     * @param n Fibonacci index
-     * @return elapsed time in nanoseconds
-     */
-    private static long timeDynamic(int n) {
+    private static double timeDynamic(int n) {
         long start = System.nanoTime();
 
         DynamicFibonacci.fibonacci(n);
 
         long end = System.nanoTime();
 
-        return end - start;
+        double duration = (end - start) / 1e9;
+
+        return duration;
     }
 
-    private static long timeBinet(int n) {
+    private static double timeBinet(int n) {
         long start = System.nanoTime();
 
         BinetFibonacci.fibonacci(n);
 
         long end = System.nanoTime();
 
-        return end - start;
+        double duration = (end - start) / 1e9;
+
+        return duration;
     }
 
-    private static long timeRecursive(int n) {
+    private static double timeRecursive(int n) {
         long start = System.nanoTime();
 
         RecursiveFibonacci.fibonacci(n);
 
         long end = System.nanoTime();
 
-        return end - start;
+        double duration = (end - start) / 1e9;
+
+        return duration;
     }
 
     public static void main(String[] args) {
@@ -48,14 +44,14 @@ public class EraDemo {
 
         for (int n = 1; n <= 40; n++) {
 
-            long dynamicTime = timeDynamic(n);
-            long binetTime = timeBinet(n);
-            long recursiveTime = timeRecursive(n);
+            double dynamicTime = timeDynamic(n);
+            double binetTime = timeBinet(n);
+            double recursiveTime = timeRecursive(n);
 
             System.out.println(
-                n + "," +
-                dynamicTime + "," +
-                binetTime + "," +
+                n + "\t" +
+                dynamicTime + "\t" +
+                binetTime + "\t" +
                 recursiveTime
             );
         }
