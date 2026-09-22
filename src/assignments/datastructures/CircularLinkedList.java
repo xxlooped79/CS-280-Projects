@@ -4,7 +4,7 @@ import adt.List;
 import java.util.Iterator;
 
 /**
- * A linked list where the last node points back to the first node.
+ * A circular linked list where the last node points back to the first node.
  *
  * @param <T> the type of each element
  */
@@ -194,17 +194,17 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
         T data;
         Node link;
 
-        Node(T data, Node link) {
-            this.data = data;
-            this.link = link;
-        }
-
         Node(T data) {
             this.data = data;
             this.link = null;
         }
     }
 
+    /**
+     * Run tests for the circular linked list.
+     *
+     * @param args command-line arguments
+     */
     public static void main(String[] args) {
         List.validate(new CircularLinkedList<>());
 
