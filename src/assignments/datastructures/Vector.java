@@ -1,6 +1,7 @@
 package assignments.datastructures;
 
 import adt.List;
+import adt.Stack;
 import java.util.Iterator;
 
 /// An extensible list backed by an array buffer.
@@ -13,7 +14,7 @@ import java.util.Iterator;
 /// Then you need to allocate an even larger buffer, and copy the present buffer to the new one.
 ///
 /// @param <T> the type of each element
-public class Vector<T> implements List<T>, Iterable<T> {
+public class Vector<T> implements List<T>, Stack<T>, Iterable<T> {
 
     /** The initial amount of buffer space in a newly-created vector. */
     public static final int INITIAL_BUFFER_SIZE = 10;
@@ -158,13 +159,57 @@ public class Vector<T> implements List<T>, Iterable<T> {
     }
 
     /**
+     * Check if the vector is empty.
+     *
+     * @return true if the vector contains no elements
+     */
+    @Override
+    public boolean isEmpty() {
+        return this.size == 0;
+    }
+
+    /**
+     * Add an item to the top of the stack.
+     *
+     * @param value the value to push
+     */
+    @Override
+    public void push(T value) {
+        this.insert(this.size, value);
+    }
+
+    /**
+     * Remove and return the item from the top of the stack.
+     *
+     * @return the value removed from the top
+     */
+    @Override
+    public T pop() {
+        assert this.size > 0;
+
+        return this.delete(this.size - 1);
+    }
+
+    /**
+     * Return the item at the top of the stack without removing it.
+     *
+     * @return the value at the top
+     */
+    @Override
+    public T peek() {
+        assert this.size > 0;
+
+        return this.at(this.size - 1);
+    }
+
+    /**
      * Run validation tests.
      * @param args command-line args
      */
     public static void main(String[] args) {
         List.validate(new Vector<>());
+        Stack.validate(new Vector<>());
 
-        
         Vector<Integer> vector = new Vector<>();
 
         for (int i = 0; i < INITIAL_BUFFER_SIZE; i++) {

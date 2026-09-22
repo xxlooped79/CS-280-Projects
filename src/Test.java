@@ -38,7 +38,7 @@ public class Test {
         InsertionSort.main(args);
         Vector.main(args);
         LinkedList.main(args);
-
+        CircularLinkedList.main(args);
         /* Call additional main routines as you create new data strutures. */
 
         return true;

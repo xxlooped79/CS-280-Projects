@@ -1,59 +1,58 @@
 package assignments.datastructures;
 
 import adt.List;
-import adt.Stack;
 import java.util.Iterator;
 
-/// An extensible list backed by a chain of nodes.
+/// A circular list backed by a chain of nodes.
 ///
 /// The idea here is to wrap each datum in a larger structure, a *node*,
-/// which also contains a pointer to the node containing the *next* element in the list.
-/// This structure permits efficient insertion and deletion,
-/// in the sense that it only requires rearranging pointers nearby where the
-/// change takes place.
-///
-/// However, this structure foregoes *random access*, i.e. easy access to arbitrary locations in the list.
-/// In order to make any changes to a location in the middle of the list,
-/// one must first traverse through the chain of nodes from the beginning of the list.
+/// which also contains a pointer to the node containing the *next* element
+/// in the list. Unlike a regular linked list, the last node points back to
+/// the first node.
 ///
 /// @param <T> the type of each element
-public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
-    private Node head;
+public class CircularLinkedList<T> implements List<T>, Iterable<T> {
+    private Node tail;
     private int size;
 
     /**
      * Create an iterator that starts at the beginning of the list.
+     * The iterator stops after visiting each element once.
+     *
      * @return an iterator over the list
      */
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-            Node cursor = head;
+            Node cursor = tail == null ? null : tail.link;
+            int count = 0;
 
             @Override
             public boolean hasNext() {
-                return cursor != null;
+                return count < size;
             }
 
             @Override
             public T next() {
                 T value = cursor.data;
                 cursor = cursor.link;
+                count++;
                 return value;
             }
         };
     }
 
     /**
-     * Initialize an empty linked list.
+     * Initialize an empty circular linked list.
      */
-    public LinkedList() {
-        this.head = null;
+    public CircularLinkedList() {
+        this.tail = null;
         this.size = 0;
     }
 
     /**
      * Compute the number of items in this list.
+     *
      * @return the number of items
      */
     public int length() {
@@ -62,13 +61,14 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
 
     /**
      * Fetch an item from the list.
-     * @param index the location of the item - a nonnegative integer less than the length of the list
+     *
+     * @param index the location of the item
      * @return the value stored at the given location
      */
     public T at(int index) {
         assert 0 <= index && index < this.size;
 
-        Node current = this.head;
+        Node current = this.tail.link;
 
         for (int i = 0; i < index; i++) {
             current = current.link;
@@ -79,13 +79,14 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
 
     /**
      * Change an item in the list.
-     * @param index the location of the item - a nonnegative integer less than the length of the list
-     * @param value the new value to assign at the given location
+     *
+     * @param index the location of the item
+     * @param value the new value to assign
      */
     public void set(int index, T value) {
         assert 0 <= index && index < this.size;
 
-        Node current = this.head;
+        Node current = this.tail.link;
 
         for (int i = 0; i < index; i++) {
             current = current.link;
@@ -96,13 +97,18 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
 
     /**
      * Check if the list contains a given value.
+     *
      * @param value the value to look for
      * @return true iff the collection contains value
      */
     public boolean contains(T value) {
-        Node current = this.head;
+        if (this.size == 0) {
+            return false;
+        }
 
-        while (current != null) {
+        Node current = this.tail.link;
+
+        for (int i = 0; i < this.size; i++) {
             if (current.data.equals(value)) {
                 return true;
             }
@@ -115,22 +121,32 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
 
     /**
      * Insert an item into the list.
-     * @param index the location of where to put the item - a nonnegative integer less than or equal to the length of the list
+     *
+     * @param index the location where to put the item
      * @param value the new value to put at the given location
      */
     public void insert(int index, T value) {
         assert 0 <= index && index <= this.size;
 
-        if (index == 0) {
-            this.head = new Node(value, this.head);
+        if (this.size == 0) {
+            Node node = new Node(value, null);
+            node.link = node;
+            this.tail = node;
+        } else if (index == 0) {
+            Node head = this.tail.link;
+            this.tail.link = new Node(value, head);
         } else {
-            Node current = this.head;
+            Node current = this.tail.link;
 
             for (int i = 0; i < index - 1; i++) {
                 current = current.link;
             }
 
             current.link = new Node(value, current.link);
+
+            if (index == this.size) {
+                this.tail = current.link;
+            }
         }
 
         this.size++;
@@ -138,7 +154,8 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
 
     /**
      * Remove an item from the list.
-     * @param index the location to delete from - a nonnegative integer less than the length of the list
+     *
+     * @param index the location to delete from
      * @return the value which was removed
      */
     public T delete(int index) {
@@ -146,17 +163,25 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
 
         T value;
 
-        if (index == 0) {
-            value = this.head.data;
-            this.head = this.head.link;
+        if (this.size == 1) {
+            value = this.tail.data;
+            this.tail = null;
+        } else if (index == 0) {
+            value = this.tail.link.data;
+            this.tail.link = this.tail.link.link;
         } else {
-            Node current = this.head;
+            Node current = this.tail.link;
 
             for (int i = 0; i < index - 1; i++) {
                 current = current.link;
             }
 
             value = current.link.data;
+
+            if (current.link == this.tail) {
+                this.tail = current;
+            }
+
             current.link = current.link.link;
         }
 
@@ -166,51 +191,7 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
     }
 
     /**
-     * Check if the linked list is empty.
-     *
-     * @return true if the list contains no elements
-     */
-    @Override
-    public boolean isEmpty() {
-        return this.size == 0;
-    }
-
-    /**
-     * Add an item to the top of the stack.
-     *
-     * @param value the value to push
-     */
-    @Override
-    public void push(T value) {
-        this.insert(this.size, value);
-    }
-
-    /**
-     * Remove and return the item from the top of the stack.
-     *
-     * @return the value removed from the top
-     */
-    @Override
-    public T pop() {
-        assert this.size > 0;
-
-        return this.delete(this.size - 1);
-    }
-
-    /**
-     * Return the item at the top of the stack without removing it.
-     *
-     * @return the value at the top
-     */
-    @Override
-    public T peek() {
-        assert this.size > 0;
-
-        return this.at(this.size - 1);
-    }
-
-    /**
-     * An encapsulation of a value with a pointer, allowing us to chain to another value.
+     * An encapsulation of a value with a pointer to the next node.
      */
     private class Node {
         T data;
@@ -218,6 +199,7 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
 
         /**
          * Initialize a node.
+         *
          * @param data the data value
          * @param link the next node in the chain
          */
@@ -229,14 +211,14 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
 
     /**
      * Run validation tests.
+     *
      * @param args command-line args
      */
     public static void main(String[] args) {
-        List.validate(new LinkedList<>());
-        Stack.validate(new LinkedList<>());
+        List.validate(new CircularLinkedList<>());
 
         // Test iterator.
-        LinkedList<Integer> list = new LinkedList<>();
+        CircularLinkedList<Integer> list = new CircularLinkedList<>();
 
         for (int i = 0; i < 5; i++) {
             list.insert(0, i);
@@ -250,6 +232,6 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
 
         assert !iter.hasNext();
 
-        System.out.println("LinkedList passes all tests.");
+        System.out.println("CircularLinkedList passes all tests.");
     }
 }
