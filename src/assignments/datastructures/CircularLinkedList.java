@@ -1,6 +1,7 @@
 package assignments.datastructures;
 
 import adt.List;
+import adt.Queue;
 import java.util.Iterator;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Iterator;
  *
  * @param <T> the type of each element
  */
-public class CircularLinkedList<T> implements List<T>, Iterable<T> {
+public class CircularLinkedList<T> implements List<T>, Queue<T>, Iterable<T> {
 
     private Node tail;
     private int size;
@@ -162,6 +163,46 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
     }
 
     /**
+     * Check if the queue is empty.
+     *
+     * @return true if the queue is empty
+     */
+    @Override
+    public boolean isEmpty() {
+        return this.size == 0;
+    }
+
+    /**
+     * Add a value to the end of the queue.
+     *
+     * @param value the value to add
+     */
+    @Override
+    public void enqueue(T value) {
+        this.insert(this.size, value);
+    }
+
+    /**
+     * Remove and return the first value in the queue.
+     *
+     * @return the value removed from the queue
+     */
+    @Override
+    public T dequeue() {
+        return this.delete(0);
+    }
+
+    /**
+     * Look at the first value in the queue without removing it.
+     *
+     * @return the first value in the queue
+     */
+    @Override
+    public T peek() {
+        return this.at(0);
+    }
+
+    /**
      * Create an iterator for the list.
      *
      * @return an iterator over the list
@@ -207,6 +248,7 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
      */
     public static void main(String[] args) {
         List.validate(new CircularLinkedList<>());
+        Queue.validate(new CircularLinkedList<>());
 
         // Test iterator.
         CircularLinkedList<Integer> list = new CircularLinkedList<>();
