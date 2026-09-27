@@ -1,5 +1,4 @@
 
-import assignments.algorithms.BinetFibonacci;
 import assignments.algorithms.DynamicFibonacci;
 import assignments.algorithms.RecursiveFibonacci;
 import assignments.datastructures.*;

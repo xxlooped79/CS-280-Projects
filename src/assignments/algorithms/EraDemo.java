@@ -1,11 +1,23 @@
 package assignments.algorithms;
 
+import assignments.datastructures.Vector;
+import assignments.datastructures.LinkedList;
+import assignments.datastructures.CircularLinkedList;
+
 public class EraDemo {
 
-    private static double timeDynamic(int n) {
+    private static double timeVector(int n) {
+        Vector<Integer> list = new Vector<>();
+
+        // Prepare the list - not timed
+        for (int i = 0; i < n; i++) {
+            list.insert(i, 0);
+        }
+
         long start = System.nanoTime();
 
-        DynamicFibonacci.fibonacci(n);
+        // Time inserting at the beginning
+        list.insert(0, 0);
 
         long end = System.nanoTime();
 
@@ -14,10 +26,18 @@ public class EraDemo {
         return duration;
     }
 
-    private static double timeBinet(int n) {
+    private static double timeLinkedList(int n) {
+        LinkedList<Integer> list = new LinkedList<>();
+
+        // Prepare the list - not timed
+        for (int i = 0; i < n; i++) {
+            list.insert(i, 0);
+        }
+
         long start = System.nanoTime();
 
-        BinetFibonacci.fibonacci(n);
+        // Time inserting at the beginning
+        list.insert(0, 0);
 
         long end = System.nanoTime();
 
@@ -26,10 +46,18 @@ public class EraDemo {
         return duration;
     }
 
-    private static double timeRecursive(int n) {
+    private static double timeCircularLinkedList(int n) {
+        CircularLinkedList<Integer> list = new CircularLinkedList<>();
+
+        // Prepare the list - not timed
+        for (int i = 0; i < n; i++) {
+            list.insert(i, 0);
+        }
+
         long start = System.nanoTime();
 
-        RecursiveFibonacci.fibonacci(n);
+        // Time inserting at the beginning
+        list.insert(0, 0);
 
         long end = System.nanoTime();
 
@@ -40,19 +68,19 @@ public class EraDemo {
 
     public static void main(String[] args) {
 
-        System.out.println("N,Dynamic,Binet,Recursive");
+        System.out.println("N,Vector,LinkedList,CircularLinkedList");
 
-        for (int n = 1; n <= 40; n++) {
+        for (int n = 1000; n <= 1000000; n *= 2) {
 
-            double dynamicTime = timeDynamic(n);
-            double binetTime = timeBinet(n);
-            double recursiveTime = timeRecursive(n);
+            double vectorTime = timeVector(n);
+            double linkedListTime = timeLinkedList(n);
+            double circularLinkedListTime = timeCircularLinkedList(n);
 
             System.out.println(
                 n + "," +
-                dynamicTime + "," +
-                binetTime + "," +
-                recursiveTime
+                vectorTime + "," +
+                linkedListTime + "," +
+                circularLinkedListTime
             );
         }
     }
