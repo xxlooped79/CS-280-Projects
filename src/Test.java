@@ -1,4 +1,7 @@
 
+import assignments.algorithms.BinetFibonacci;
+import assignments.algorithms.DynamicFibonacci;
+import assignments.algorithms.RecursiveFibonacci;
 import assignments.datastructures.*;
 import assignments.sorting.*;
 
@@ -39,6 +42,8 @@ public class Test {
         Vector.main(args);
         LinkedList.main(args);
         CircularLinkedList.main(args);
+        DynamicFibonacci.main(args);
+        RecursiveFibonacci.main(args); 
         /* Call additional main routines as you create new data strutures. */
 
         return true;
