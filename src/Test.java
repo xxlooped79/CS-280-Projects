@@ -1,5 +1,6 @@
 
 import assignments.algorithms.DynamicFibonacci;
+import assignments.algorithms.EraDemo;
 import assignments.algorithms.RecursiveFibonacci;
 import assignments.datastructures.*;
 import assignments.sorting.*;
@@ -43,6 +44,7 @@ public class Test {
         CircularLinkedList.main(args);
         DynamicFibonacci.main(args);
         RecursiveFibonacci.main(args); 
+        EraDemo.main(args);
         /* Call additional main routines as you create new data strutures. */
 
         return true;
