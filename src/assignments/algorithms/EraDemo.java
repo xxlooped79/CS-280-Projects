@@ -11,19 +11,16 @@ public class EraDemo {
 
         // Prepare the list - not timed
         for (int i = 0; i < n; i++) {
-            list.insert(i, 0);
+            list.insert(list.length(), 0);
         }
 
         long start = System.nanoTime();
 
-        // Time inserting at the beginning
         list.insert(0, 0);
 
         long end = System.nanoTime();
 
-        double duration = (end - start) / 1e9;
-
-        return duration;
+        return (end - start) / 1e9;
     }
 
     private static double timeLinkedList(int n) {
@@ -31,19 +28,16 @@ public class EraDemo {
 
         // Prepare the list - not timed
         for (int i = 0; i < n; i++) {
-            list.insert(i, 0);
+            list.insert(0, 0);
         }
 
         long start = System.nanoTime();
 
-        // Time inserting at the beginning
         list.insert(0, 0);
 
         long end = System.nanoTime();
 
-        double duration = (end - start) / 1e9;
-
-        return duration;
+        return (end - start) / 1e9;
     }
 
     private static double timeCircularLinkedList(int n) {
@@ -51,19 +45,16 @@ public class EraDemo {
 
         // Prepare the list - not timed
         for (int i = 0; i < n; i++) {
-            list.insert(i, 0);
+            list.insert(0, 0);
         }
 
         long start = System.nanoTime();
 
-        // Time inserting at the beginning
         list.insert(0, 0);
 
         long end = System.nanoTime();
 
-        double duration = (end - start) / 1e9;
-
-        return duration;
+        return (end - start) / 1e9;
     }
 
     public static void main(String[] args) {
