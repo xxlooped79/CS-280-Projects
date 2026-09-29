@@ -1,6 +1,8 @@
 
 import assignments.algorithms.DynamicFibonacci;
 import assignments.algorithms.EraDemo;
+import assignments.algorithms.MergeSort;
+import assignments.algorithms.QuickSort;
 import assignments.algorithms.RecursiveFibonacci;
 import assignments.datastructures.*;
 import assignments.sorting.*;
@@ -45,6 +47,8 @@ public class Test {
         DynamicFibonacci.main(args);
         RecursiveFibonacci.main(args); 
         EraDemo.main(args);
+        QuickSort.main(args);
+        MergeSort.main(args);
         /* Call additional main routines as you create new data strutures. */
 
         return true;
