@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2026-09-29">
-<meta name="description" content="declaration: package: assignments.sorting, class: SortingAlgorithm">
+<meta name="description" content="declaration: package: assignments.algorithms, class: SortingAlgorithm">
 <meta name="generator" content="javadoc/ClassWriter">
 <link rel="stylesheet" type="text/css" href="../../resource-files/jquery-ui.min.css">
 <link rel="stylesheet" type="text/css" href="../../resource-files/stylesheet.css">
@@ -40,7 +40,7 @@ loadScripts(document, 'script');</script>
 <div class="sub-nav">
 <div class="nav-content">
 <ol class="sub-nav-list">
-<li><a href="package-summary.html">assignments.sorting</a></li>
+<li><a href="package-summary.html">assignments.algorithms</a></li>
 <li><a href="SortingAlgorithm.html" class="current-selection">SortingAlgorithm</a></li>
 </ol>
 <div class="nav-list-search"><input type="text" id="search-input" disabled placeholder="Search documentation (type /)" aria-label="Search in documentation" autocomplete="off" spellcheck="false"><input type="reset" id="reset-search" disabled value="Reset"></div>
@@ -65,7 +65,7 @@ loadScripts(document, 'script');</script>
 <ol class="toc-list">
 <li><a href="#sort(T%5B%5D)" tabindex="0">sort(T[])</a></li>
 <li><a href="#sorted(T%5B%5D)" tabindex="0">sorted(T[])</a></li>
-<li><a href="#validate(assignments.sorting.SortingAlgorithm)" tabindex="0">validate(SortingAlgorithm)</a></li>
+<li><a href="#validate(assignments.algorithms.SortingAlgorithm)" tabindex="0">validate(SortingAlgorithm)</a></li>
 </ol>
 </li>
 </ol>
@@ -76,7 +76,7 @@ loadScripts(document, 'script');</script>
 <h1 title="Class SortingAlgorithm" class="title">Class SortingAlgorithm&lt;T extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;T&gt;&gt;</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">assignments.sorting.SortingAlgorithm&lt;T&gt;</div>
+<div class="inheritance">assignments.algorithms.SortingAlgorithm&lt;T&gt;</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
@@ -85,7 +85,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <dl class="notes">
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="BubbleSort.html" title="class in assignments.sorting">BubbleSort</a>, <a href="InsertionSort.html" title="class in assignments.sorting">InsertionSort</a>, <a href="SelectionSort.html" title="class in assignments.sorting">SelectionSort</a></code></dd>
+<dd><code><a href="QuickSort.html" title="class in assignments.algorithms">QuickSort</a></code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
@@ -148,7 +148,7 @@ The subclasses you create will only need to override the &quot;in-place&quot; ve
 <div class="block">Construct a sorted version of an array.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#validate(assignments.sorting.SortingAlgorithm)" class="member-name-link">validate</a><wbr>(<a href="SortingAlgorithm.html" title="class in assignments.sorting">SortingAlgorithm</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;algorithm)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#validate(assignments.algorithms.SortingAlgorithm)" class="member-name-link">validate</a><wbr>(<a href="SortingAlgorithm.html" title="class in assignments.algorithms">SortingAlgorithm</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;algorithm)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Test a sorting algorithm with a standard test,
  including potentially tricky features like negative numbers and duplicates.</div>
@@ -225,10 +225,10 @@ Post-condition: `array` is sorted in ascending order.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="validate(assignments.sorting.SortingAlgorithm)">
+<section class="detail" id="validate(assignments.algorithms.SortingAlgorithm)">
 <h3>validate</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">validate</span><wbr><span class="parameters">(<a href="SortingAlgorithm.html" title="class in assignments.sorting">SortingAlgorithm</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;algorithm)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">validate</span><wbr><span class="parameters">(<a href="SortingAlgorithm.html" title="class in assignments.algorithms">SortingAlgorithm</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;algorithm)</span></div>
 <div class="block">Test a sorting algorithm with a standard test,
  including potentially tricky features like negative numbers and duplicates.</div>
 <dl class="notes">
