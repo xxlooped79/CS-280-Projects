@@ -1,4 +1,6 @@
 
+import assignments.algorithms.MergeSort;
+import assignments.algorithms.QuickSort;
 import assignments.datastructures.*;
 import assignments.sorting.*;
 
@@ -42,6 +44,10 @@ public class Test {
         KeyValuePair.main(args);
         LinkedList.main(args);
         Vector.main(args);
+        QuickSort quickSort = new QuickSort();
+        quickSort.main(args);
+        MergeSort mergeSort = new MergeSort();
+        mergeSort.main(args);
         /* Call additional main routines as you create new data strutures. */
 
         return true;
