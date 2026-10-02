@@ -44,11 +44,7 @@ public class Test {
         Vector.main(args);
         LinkedList.main(args);
         CircularLinkedList.main(args);
-        DynamicFibonacci.main(args);
-        RecursiveFibonacci.main(args); 
-        EraDemo.main(args);
-        QuickSort.main(args);
-        MergeSort.main(args);
+    
         /* Call additional main routines as you create new data strutures. */
 
         return true;
