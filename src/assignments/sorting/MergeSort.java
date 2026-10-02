@@ -1,6 +1,4 @@
-package assignments.algorithms;
-
-import assignments.sorting.SortingAlgorithm;
+package assignments.sorting;
 
 /**
  * This class uses MergeSort to sort an array of integers.

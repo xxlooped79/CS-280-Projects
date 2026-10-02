@@ -1,6 +1,4 @@
 
-import assignments.algorithms.MergeSort;
-import assignments.algorithms.QuickSort;
 import assignments.datastructures.*;
 import assignments.sorting.*;
 
