@@ -1,5 +1,7 @@
 package assignments.algorithms;
 
+import assignments.sorting.SortingAlgorithm;
+
 /**
  * Quick sort implementation.
  */
