@@ -83,7 +83,7 @@ public class QuickSort extends SortingAlgorithm<Integer> {
      *
      * @param args command-line arguments
      */
-    public static void main(String[] args) {
+    public void main(String[] args) {
         SortingAlgorithm.validate(new QuickSort());
         System.out.println("QuickSort passes all tests.");
     }

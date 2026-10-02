@@ -43,7 +43,7 @@ public class InsertionSort<T extends Comparable<T>> extends SortingAlgorithm<T>
      */
     public InsertionSort() {}
 
-    public static void main(String[] args)
+    public void main(String[] args)
     {
         // Test the InsertionSort implementation.
         SortingAlgorithm.validate(new InsertionSort<Integer>());

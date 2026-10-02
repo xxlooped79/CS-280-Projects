@@ -108,7 +108,7 @@ public class MergeSort extends SortingAlgorithm<Integer> {
      *
      * @param args command-line arguments
      */
-    public static void main(String[] args) {
+    public void main(String[] args) {
         SortingAlgorithm.validate(new MergeSort());
         System.out.println("MergeSort passes all tests.");
     }

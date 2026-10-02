@@ -121,4 +121,6 @@ public abstract class SortingAlgorithm<T extends Comparable<T>> {
             algorithm.getClass().getSimpleName()
         ));
     }
+
+    public abstract void main(String[] args);
 }

@@ -49,7 +49,7 @@ public class BubbleSort<T extends Comparable<T>> extends SortingAlgorithm<T>
      */
     public BubbleSort() {}
 
-    public static void main(String[] args)
+    public void main(String[] args)
     {
         SortingAlgorithm.validate(new BubbleSort<Integer>());
         System.out.println("Bubblesort has passed all tests");

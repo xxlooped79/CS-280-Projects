@@ -57,7 +57,7 @@ public class SelectionSort<T extends Comparable<T>> extends SortingAlgorithm<T>
      */
     public SelectionSort() {}
 
-    public static void main(String[] args)
+    public void main(String[] args)
     {
         // Test the SelectionSort implementation.
         SortingAlgorithm.validate(new SelectionSort<Integer>());
