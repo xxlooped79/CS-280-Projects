@@ -1,6 +1,4 @@
 
-import java.security.Key;
-
 import assignments.datastructures.*;
 import assignments.sorting.*;
 
@@ -33,10 +31,13 @@ public class Test {
         // Test sorting algorithms.
         /* Call additional main routines here as you create new sorting algorithms. */
     
+        BubbleSort bubbleSort = new BubbleSort();
         // Test data structures.
-        BubbleSort.main(args);
-        InsertionSort.main(args);
-        SelectionSort.main(args);
+        bubbleSort.main(args);
+        InsertionSort insertionSort = new InsertionSort();
+        insertionSort.main(args);
+        SelectionSort selectionSort = new SelectionSort();
+        selectionSort.main(args);
         CircularLinkedList.main(args);
         KeyValuePair.main(args);
         LinkedList.main(args);
