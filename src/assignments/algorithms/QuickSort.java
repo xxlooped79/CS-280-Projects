@@ -47,5 +47,6 @@ public class QuickSort extends SortingAlgorithm<Integer> {
 
     public static void main(String[] args) {
         SortingAlgorithm.validate(new QuickSort());
+        System.out.println("QuickSort passes all tests.");
     }
 }
