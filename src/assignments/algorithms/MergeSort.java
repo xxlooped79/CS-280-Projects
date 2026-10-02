@@ -13,50 +13,53 @@ public class MergeSort extends SortingAlgorithm<Integer> {
             return;
         }
 
-        int middle = array.length / 2;
+        Integer[] work = new Integer[array.length];
 
-        Integer[] left = new Integer[middle];
-        Integer[] right = new Integer[array.length - middle];
-
-        for (int i = 0; i < middle; i++) {
-            left[i] = array[i];
-        }
-
-        for (int i = middle; i < array.length; i++) {
-            right[i - middle] = array[i];
-        }
-
-        sort(left);
-        sort(right);
-
-        merge(array, left, right);
+        mergeSort(array, work, 0, array.length - 1);
     }
 
-    private void merge(Integer[] array, Integer[] left, Integer[] right) {
-        int leftIndex = 0;
-        int rightIndex = 0;
-        int arrayIndex = 0;
+    private void mergeSort(Integer[] array, Integer[] work, int low, int high) {
+        if (low < high) {
+            int middle = (low + high) / 2;
 
-        while (leftIndex < left.length && rightIndex < right.length) {
-            if (left[leftIndex] <= right[rightIndex]) {
-                array[arrayIndex] = left[leftIndex];
+            mergeSort(array, work, low, middle);
+            mergeSort(array, work, middle + 1, high);
+
+            merge(array, work, low, middle, high);
+        }
+    }
+
+    private void merge(Integer[] array, Integer[] work,
+                       int low, int middle, int high) {
+
+        for (int i = low; i <= high; i++) {
+            work[i] = array[i];
+        }
+
+        int leftIndex = low;
+        int rightIndex = middle + 1;
+        int arrayIndex = low;
+
+        while (leftIndex <= middle && rightIndex <= high) {
+            if (work[leftIndex] <= work[rightIndex]) {
+                array[arrayIndex] = work[leftIndex];
                 leftIndex++;
             } else {
-                array[arrayIndex] = right[rightIndex];
+                array[arrayIndex] = work[rightIndex];
                 rightIndex++;
             }
 
             arrayIndex++;
         }
 
-        while (leftIndex < left.length) {
-            array[arrayIndex] = left[leftIndex];
+        while (leftIndex <= middle) {
+            array[arrayIndex] = work[leftIndex];
             leftIndex++;
             arrayIndex++;
         }
 
-        while (rightIndex < right.length) {
-            array[arrayIndex] = right[rightIndex];
+        while (rightIndex <= high) {
+            array[arrayIndex] = work[rightIndex];
             rightIndex++;
             arrayIndex++;
         }
@@ -64,5 +67,6 @@ public class MergeSort extends SortingAlgorithm<Integer> {
 
     public static void main(String[] args) {
         SortingAlgorithm.validate(new MergeSort());
+        System.out.println("MergeSort passes all tests.");
     }
 }
