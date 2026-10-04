@@ -22,7 +22,7 @@ public class MergeSort extends SortingAlgorithm<Integer> {
             return;
         }
 
-        // Make a work array to help with merging.
+        // Make one work array before the recursion starts.
         Integer[] work = new Integer[array.length];
 
         // Start sorting the whole array.
