@@ -43,11 +43,14 @@ public class InsertionSort<T extends Comparable<T>> extends SortingAlgorithm<T>
      */
     public InsertionSort() {}
 
+    /**
+     * Tests the InsertionSort implementation.
+     *
+     * @param args command-line arguments
+     */
     public void main(String[] args)
     {
-        // Test the InsertionSort implementation.
         SortingAlgorithm.validate(new InsertionSort<Integer>());
-
         System.out.println("InsertionSort has passed all tests");
 
         // Fill an array with random numbers.
@@ -60,7 +63,8 @@ public class InsertionSort<T extends Comparable<T>> extends SortingAlgorithm<T>
         }
 
         // Create an InsertionSort object.
-        SortingAlgorithm<Integer> sorter = new InsertionSort<Integer>();
+        SortingAlgorithm<Integer> sorter =
+            new InsertionSort<Integer>();
 
         // Start measuring the runtime.
         long start = System.nanoTime();

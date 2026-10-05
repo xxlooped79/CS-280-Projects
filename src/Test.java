@@ -29,23 +29,18 @@ public class Test {
 
     private static boolean runTests(String[] args) {
         // Test sorting algorithms.
+    new BubbleSort<Integer>().main(args);
+    new InsertionSort<Integer>().main(args);
+    new SelectionSort<Integer>().main(args);
+    new QuickSort().main(args);
+    new MergeSort().main(args);
         /* Call additional main routines here as you create new sorting algorithms. */
     
-        BubbleSort bubbleSort = new BubbleSort();
         // Test data structures.
-        bubbleSort.main(args);
-        InsertionSort insertionSort = new InsertionSort();
-        insertionSort.main(args);
-        SelectionSort selectionSort = new SelectionSort();
-        selectionSort.main(args);
         CircularLinkedList.main(args);
         KeyValuePair.main(args);
         LinkedList.main(args);
         Vector.main(args);
-        QuickSort quickSort = new QuickSort();
-        quickSort.main(args);
-        MergeSort mergeSort = new MergeSort();
-        mergeSort.main(args);
         /* Call additional main routines as you create new data strutures. */
 
         return true;
