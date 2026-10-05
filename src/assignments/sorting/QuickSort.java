@@ -60,7 +60,6 @@ public class QuickSort extends SortingAlgorithm<Integer> {
         // Go through the values and move smaller ones to the left.
         for (int j = low; j < high; j++) {
             if (array[j] <= pivot) {
-                // Swap the two values.
                 Integer temp = array[i];
                 array[i] = array[j];
                 array[j] = temp;
