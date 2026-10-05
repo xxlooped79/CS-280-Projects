@@ -124,6 +124,6 @@ public abstract class SortingAlgorithm<T extends Comparable<T>> {
      * @param args command-line arguments
      */
     public void main(String[] args) {
-        throw new UnsupportedOperationException("Unimplemented method 'main'");
+        ;
     }
 }
