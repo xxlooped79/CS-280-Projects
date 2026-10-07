@@ -23,6 +23,7 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
 
     /**
      * Create an iterator that starts at the beginning of the list.
+     *
      * @return an iterator over the list
      */
     @Override
@@ -54,6 +55,7 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
 
     /**
      * Compute the number of items in this list.
+     *
      * @return the number of items
      */
     public int length() {
@@ -62,7 +64,8 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
 
     /**
      * Fetch an item from the list.
-     * @param index the location of the item - a nonnegative integer less than the length of the list
+     *
+     * @param index the location of the item
      * @return the value stored at the given location
      */
     public T at(int index) {
@@ -79,7 +82,8 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
 
     /**
      * Change an item in the list.
-     * @param index the location of the item - a nonnegative integer less than the length of the list
+     *
+     * @param index the location of the item
      * @param value the new value to assign at the given location
      */
     public void set(int index, T value) {
@@ -96,8 +100,9 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
 
     /**
      * Check if the list contains a given value.
+     *
      * @param value the value to look for
-     * @return true iff the collection contains value
+     * @return true if the collection contains value
      */
     public boolean contains(T value) {
         Node current = this.head;
@@ -115,7 +120,8 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
 
     /**
      * Insert an item into the list.
-     * @param index the location of where to put the item - a nonnegative integer less than or equal to the length of the list
+     *
+     * @param index the location of where to put the item
      * @param value the new value to put at the given location
      */
     public void insert(int index, T value) {
@@ -138,7 +144,8 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
 
     /**
      * Remove an item from the list.
-     * @param index the location to delete from - a nonnegative integer less than the length of the list
+     *
+     * @param index the location to delete from
      * @return the value which was removed
      */
     public T delete(int index) {
@@ -178,11 +185,14 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
     /**
      * Add an item to the top of the stack.
      *
+     * The beginning of the linked list is used as the top
+     * of the stack.
+     *
      * @param value the value to push
      */
     @Override
     public void push(T value) {
-        this.insert(this.size, value);
+        this.insert(0, value);
     }
 
     /**
@@ -194,7 +204,7 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
     public T pop() {
         assert this.size > 0;
 
-        return this.delete(this.size - 1);
+        return this.delete(0);
     }
 
     /**
@@ -206,11 +216,12 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
     public T peek() {
         assert this.size > 0;
 
-        return this.at(this.size - 1);
+        return this.at(0);
     }
 
     /**
-     * An encapsulation of a value with a pointer, allowing us to chain to another value.
+     * An encapsulation of a value with a pointer,
+     * allowing us to chain to another value.
      */
     private class Node {
         T data;
@@ -218,6 +229,7 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
 
         /**
          * Initialize a node.
+         *
          * @param data the data value
          * @param link the next node in the chain
          */
@@ -229,6 +241,7 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
 
     /**
      * Run validation tests.
+     *
      * @param args command-line args
      */
     public static void main(String[] args) {
