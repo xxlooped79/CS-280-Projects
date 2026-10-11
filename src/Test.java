@@ -40,6 +40,7 @@ public class Test {
         KeyValuePair.main(args);
         LinkedList.main(args);
         Vector.main(args);
+        BinarySearchTree.main(args);
         /* Call additional main routines as you create new data strutures. */
 
         return true;
