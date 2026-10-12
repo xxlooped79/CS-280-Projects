@@ -3,6 +3,7 @@ package assignments.datastructures;
 import adt.List;
 import adt.Stack;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /// An extensible list backed by a chain of nodes.
 ///
@@ -18,6 +19,7 @@ import java.util.Iterator;
 ///
 /// @param <T> the type of each element
 public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
+
     private Node head;
     private int size;
 
@@ -29,7 +31,7 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-            Node cursor = head;
+            private Node cursor = head;
 
             @Override
             public boolean hasNext() {
@@ -38,6 +40,10 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
 
             @Override
             public T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+
                 T value = cursor.data;
                 cursor = cursor.link;
                 return value;
@@ -108,7 +114,11 @@ public class LinkedList<T> implements List<T>, Stack<T>, Iterable<T> {
         Node current = this.head;
 
         while (current != null) {
-            if (current.data.equals(value)) {
+            if (value == null) {
+                if (current.data == null) {
+                    return true;
+                }
+            } else if (value.equals(current.data)) {
                 return true;
             }
 
