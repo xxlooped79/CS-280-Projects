@@ -3,6 +3,7 @@ package assignments.datastructures;
 import adt.List;
 import adt.Stack;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /// An extensible list backed by an array buffer.
 ///
@@ -153,6 +154,10 @@ public class Vector<T> implements List<T>, Stack<T>, Iterable<T> {
 
             @Override
             public T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+
                 return array[index++];
             }
         };
@@ -210,6 +215,7 @@ public class Vector<T> implements List<T>, Stack<T>, Iterable<T> {
         List.validate(new Vector<>());
         Stack.validate(new Vector<>());
 
+        // Test iterator.
         Vector<Integer> vector = new Vector<>();
 
         for (int i = 0; i < INITIAL_BUFFER_SIZE; i++) {
