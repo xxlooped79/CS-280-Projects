@@ -41,6 +41,8 @@ public class Test {
         LinkedList.main(args);
         Vector.main(args);
         BinarySearchTree.main(args);
+        PriorityDequeuer.main(args);
+        PriorityEnqueuer.main(args);
         /* Call additional main routines as you create new data strutures. */
 
         return true;
