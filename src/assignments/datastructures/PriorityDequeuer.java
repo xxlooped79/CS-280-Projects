@@ -1,4 +1,3 @@
-
 package assignments.datastructures;
 
 import adt.PriorityQueue;
@@ -6,24 +5,25 @@ import adt.PriorityQueue;
 /**
  * A priority queue that uses a sorted linked list.
  *
- * This class stores elements from highest priority
- * to lowest priority. When a new element is added,
- * it is placed in the correct position in the list.
+ * This class stores values in order from smallest
+ * to largest. When a new value is added, it goes
+ * into the correct position in the list.
  *
- * The highest-priority element is always at the
- * beginning, so dequeue takes O(1) time.
+ * Smaller values have higher priority, so the
+ * smallest value is always at the beginning.
  *
- * Enqueue takes O(N) time because it may need to
- * search through the list.
+ * Enqueue takes O(N) time because we may need
+ * to search through the list to add a value.
  *
- * Larger values are treated as higher priority.
+ * Dequeue and peek take O(1) time because the
+ * highest-priority value is always at the front.
  *
- * @param <T> the type of elements stored in the queue
+ * @param <T> the type of values stored in the queue
  */
 public class PriorityDequeuer<T extends Comparable<T>>
         implements PriorityQueue<T> {
 
-    // A node stores a value and the next node.
+    // Each node stores a value and the next node.
     private class Node {
         T data;
         Node next;
@@ -46,9 +46,10 @@ public class PriorityDequeuer<T extends Comparable<T>>
     }
 
     /**
-     * Checks whether the queue is empty.
+     * Checks if the queue is empty.
      *
-     * This method takes O(1) time.
+     * This takes O(1) time because we only
+     * need to check the size.
      *
      * @return true if the queue is empty, false otherwise
      */
@@ -58,33 +59,34 @@ public class PriorityDequeuer<T extends Comparable<T>>
     }
 
     /**
-     * Returns the number of elements in the queue.
+     * Returns the number of values in the queue.
      *
-     * This method takes O(1) time.
+     * This takes O(1) time because the size
+     * is updated when values are added or removed.
      *
-     * @return the number of elements
+     * @return the number of values in the queue
      */
     public int length() {
         return size;
     }
 
     /**
-     * Adds an element to the queue in priority order.
+     * Adds a new value in the correct position.
      *
-     * Larger values have higher priority.
-     * This method takes O(N) time because it may
+     * Smaller values have higher priority.
+     * This takes O(N) time because we may
      * need to search through the linked list.
      *
-     * @param value the element being added
+     * @param value the value being added
      */
     @Override
     public void enqueue(T value) {
         Node newNode = new Node(value);
 
-        // Add to the beginning if the queue is empty
+        // Add to the front if the list is empty
         // or the new value has higher priority.
         if (head == null ||
-                value.compareTo(head.data) > 0) {
+                value.compareTo(head.data) < 0) {
 
             newNode.next = head;
             head = newNode;
@@ -92,9 +94,9 @@ public class PriorityDequeuer<T extends Comparable<T>>
         } else {
             Node current = head;
 
-            // Find the correct position.
+            // Find the correct place for the new value.
             while (current.next != null &&
-                    current.next.data.compareTo(value) >= 0) {
+                    current.next.data.compareTo(value) <= 0) {
                 current = current.next;
             }
 
@@ -106,13 +108,13 @@ public class PriorityDequeuer<T extends Comparable<T>>
     }
 
     /**
-     * Returns the highest-priority element
-     * without removing it.
+     * Returns the highest-priority value without
+     * removing it from the queue.
      *
-     * This method takes O(1) time because
-     * the highest-priority element is at the front.
+     * This takes O(1) time because the smallest
+     * value is always at the beginning.
      *
-     * @return the highest-priority element
+     * @return the highest-priority value
      * @throws IllegalStateException if the queue is empty
      */
     @Override
@@ -125,12 +127,12 @@ public class PriorityDequeuer<T extends Comparable<T>>
     }
 
     /**
-     * Removes and returns the highest-priority element.
+     * Removes and returns the highest-priority value.
      *
-     * This method takes O(1) time because it
-     * only removes the first node.
+     * This takes O(1) time because we only
+     * need to remove the first node.
      *
-     * @return the removed element
+     * @return the value that was removed
      * @throws IllegalStateException if the queue is empty
      */
     @Override
@@ -140,6 +142,7 @@ public class PriorityDequeuer<T extends Comparable<T>>
         }
 
         T value = head.data;
+
         head = head.next;
         size--;
 
@@ -147,17 +150,14 @@ public class PriorityDequeuer<T extends Comparable<T>>
     }
 
     /**
-     * Runs the PriorityQueue interface validation.
+     * Runs the PriorityQueue interface validation
+     * to check if the queue works correctly.
      *
      * @param args command-line arguments
      */
     public static void main(String[] args) {
 
-        // Run the professor's official validation.
         PriorityQueue.validate(new PriorityDequeuer<Integer>());
 
-        System.out.println(
-            "PriorityDequeuer passes PriorityQueue interface validation."
-        );
     }
 }
