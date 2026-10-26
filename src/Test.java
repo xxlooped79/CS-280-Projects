@@ -43,6 +43,7 @@ public class Test {
         BinarySearchTree.main(args);
         PriorityDequeuer.main(args);
         PriorityEnqueuer.main(args);
+        MinHeap.main(args);
         /* Call additional main routines as you create new data strutures. */
 
         return true;
