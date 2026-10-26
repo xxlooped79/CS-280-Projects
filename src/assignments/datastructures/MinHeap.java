@@ -1,7 +1,5 @@
 package assignments.datastructures;
-
 import adt.PriorityQueue;
-
 /**
  * A priority queue that uses a min heap stored in a Vector.
  *
