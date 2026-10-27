@@ -1,77 +1,87 @@
 package assignments.algorithms;
 
-import assignments.datastructures.Vector;
-import assignments.datastructures.LinkedList;
-import assignments.datastructures.CircularLinkedList;
+import java.util.Random;
+import adt.PriorityQueue;
+import assignments.datastructures.PriorityEnqueuer;
+import assignments.datastructures.PriorityDequeuer;
+import assignments.datastructures.MinHeap;
 
+/**
+ * Empirical Runtime Analysis for priority queue dequeue.
+ *
+ * Tests how long it takes to dequeue one element
+ * from a priority queue containing N elements.
+ */
 public class EraDemo {
 
-    private static double timeVector(int n) {
-        Vector<Integer> list = new Vector<>();
+    /**
+     * Measures the time needed to dequeue one value.
+     *
+     * @param queue the priority queue being tested
+     * @param n the number of elements
+     * @param random the random number generator
+     * @return dequeue runtime in seconds
+     */
+    public static double timeDequeue(
+            PriorityQueue<Integer> queue,
+            int n, Random random) {
 
-        // Prepare the list - not timed
+        // Fill the queue before starting the timer.
         for (int i = 0; i < n; i++) {
-            list.insert(list.length(), 0);
+            int value = random.nextInt(n) + 1;
+            queue.enqueue(value);
         }
 
+        // Only measure the dequeue operation.
         long start = System.nanoTime();
 
-        list.insert(0, 0);
+        queue.dequeue();
 
         long end = System.nanoTime();
 
-        return (end - start) / 1e9;
+        return (end - start) / 1_000_000_000.0;
     }
 
-    private static double timeLinkedList(int n) {
-        LinkedList<Integer> list = new LinkedList<>();
-
-        // Prepare the list - not timed
-        for (int i = 0; i < n; i++) {
-            list.insert(0, 0);
-        }
-
-        long start = System.nanoTime();
-
-        list.insert(0, 0);
-
-        long end = System.nanoTime();
-
-        return (end - start) / 1e9;
-    }
-
-    private static double timeCircularLinkedList(int n) {
-        CircularLinkedList<Integer> list = new CircularLinkedList<>();
-
-        // Prepare the list - not timed
-        for (int i = 0; i < n; i++) {
-            list.insert(0, 0);
-        }
-
-        long start = System.nanoTime();
-
-        list.insert(0, 0);
-
-        long end = System.nanoTime();
-
-        return (end - start) / 1e9;
-    }
-
+    /**
+     * Runs the empirical runtime analysis.
+     *
+     * @param args command-line arguments
+     */
     public static void main(String[] args) {
 
-        System.out.println("N,Vector,LinkedList,CircularLinkedList");
+        Random random = new Random();
 
-        for (int n = 1000; n <= 1000000; n *= 2) {
+        int[] sizes = {
+            100, 500, 1000, 2000,
+            4000, 8000, 16000,
+            32000, 64000, 128000
+        };
 
-            double vectorTime = timeVector(n);
-            double linkedListTime = timeLinkedList(n);
-            double circularLinkedListTime = timeCircularLinkedList(n);
+        System.out.println(
+            "N,PriorityEnqueuer,PriorityDequeuer,MinHeap"
+        );
+
+        for (int n : sizes) {
+
+            // Create a fresh queue for each measurement.
+            double enqueuer = timeDequeue(
+                new PriorityEnqueuer<Integer>(),
+                n, random
+            );
+
+            double dequeuer = timeDequeue(
+                new PriorityDequeuer<Integer>(),
+                n, random
+            );
+
+            double heap = timeDequeue(
+                new MinHeap<Integer>(),
+                n, random
+            );
 
             System.out.println(
-                n + "," +
-                vectorTime + "," +
-                linkedListTime + "," +
-                circularLinkedListTime
+                n + "," + enqueuer + ","
+                + dequeuer + "," + heap
             );
         }
     }
