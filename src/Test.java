@@ -35,6 +35,8 @@ public class Test {
         new SelectionSort().main(args);
         new QuickSort().main(args);
         new MergeSort().main(args);
+        new HeapSort().main(args);
+        new TreeSort().main(args);
         // Test data structures.
         CircularLinkedList.main(args);
         KeyValuePair.main(args);
