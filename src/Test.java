@@ -37,6 +37,7 @@ public class Test {
         new MergeSort().main(args);
         new HeapSort().main(args);
         new TreeSort().main(args);
+        new BucketSort().main(args);
         // Test data structures.
         CircularLinkedList.main(args);
         KeyValuePair.main(args);
