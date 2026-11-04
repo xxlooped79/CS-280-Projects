@@ -1,41 +1,48 @@
 package assignments.algorithms;
 
 import java.util.Random;
-import adt.PriorityQueue;
-import assignments.datastructures.PriorityEnqueuer;
-import assignments.datastructures.PriorityDequeuer;
-import assignments.datastructures.MinHeap;
+import assignments.sorting.*;
 
 /**
- * Empirical Runtime Analysis for priority queue dequeue.
+ * Measures how long eight sorting algorithms take
+ * to sort arrays of random integers.
  *
- * Tests how long it takes to dequeue one element
- * from a priority queue containing N elements.
+ * The time used to create the arrays is not included.
  */
 public class EraDemo {
 
     /**
-     * Measures the time needed to dequeue one value.
+     * Creates an array of random integers.
      *
-     * @param queue the priority queue being tested
      * @param n the number of elements
-     * @param random the random number generator
-     * @return dequeue runtime in seconds
+     * @return an array with random numbers from 0 to n - 1
      */
-    public static double timeDequeue(
-            PriorityQueue<Integer> queue,
-            int n, Random random) {
+    public static Integer[] randomArray(int n) {
+        Random random = new Random();
+        Integer[] array = new Integer[n];
 
-        // Fill the queue before starting the timer.
         for (int i = 0; i < n; i++) {
-            int value = random.nextInt(n) + 1;
-            queue.enqueue(value);
+            array[i] = random.nextInt(n);
         }
 
-        // Only measure the dequeue operation.
+        return array;
+    }
+
+    /**
+     * Measures how long an algorithm takes to sort an array.
+     *
+     * @param algorithm the sorting algorithm
+     * @param n the size of the array
+     * @return the runtime in seconds
+     */
+    public static double timeSort(
+            SortingAlgorithm<Integer> algorithm, int n) {
+
+        Integer[] array = randomArray(n);
+
         long start = System.nanoTime();
 
-        queue.dequeue();
+        algorithm.sort(array);
 
         long end = System.nanoTime();
 
@@ -43,45 +50,43 @@ public class EraDemo {
     }
 
     /**
-     * Runs the empirical runtime analysis.
+     * Runs all eight sorting algorithms and prints
+     * the results in CSV format.
      *
      * @param args command-line arguments
      */
     public static void main(String[] args) {
 
-        Random random = new Random();
+        System.out.println(
+            "N,Bubble,Insertion,Selection,Quick,Merge,Tree,Heap,Bucket"
+        );
 
         int[] sizes = {
             100, 500, 1000, 2000,
-            4000, 8000, 16000,
-            32000, 64000, 128000
+            4000, 8000, 16000, 32000
         };
-
-        System.out.println(
-            "N,PriorityEnqueuer,PriorityDequeuer,MinHeap"
-        );
 
         for (int n : sizes) {
 
-            // Create a fresh queue for each measurement.
-            double enqueuer = timeDequeue(
-                new PriorityEnqueuer<Integer>(),
-                n, random
-            );
-
-            double dequeuer = timeDequeue(
-                new PriorityDequeuer<Integer>(),
-                n, random
-            );
-
-            double heap = timeDequeue(
-                new MinHeap<Integer>(),
-                n, random
-            );
+            double bubble = timeSort(new BubbleSort(), n);
+            double insertion = timeSort(new InsertionSort(), n);
+            double selection = timeSort(new SelectionSort(), n);
+            double quick = timeSort(new QuickSort(), n);
+            double merge = timeSort(new MergeSort(), n);
+            double tree = timeSort(new TreeSort(), n);
+            double heap = timeSort(new HeapSort(), n);
+            double bucket = timeSort(new BucketSort(), n);
 
             System.out.println(
-                n + "," + enqueuer + ","
-                + dequeuer + "," + heap
+                n + "," +
+                bubble + "," +
+                insertion + "," +
+                selection + "," +
+                quick + "," +
+                merge + "," +
+                tree + "," +
+                heap + "," +
+                bucket
             );
         }
     }
