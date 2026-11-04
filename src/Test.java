@@ -38,6 +38,8 @@ public class Test {
         new HeapSort().main(args);
         new TreeSort().main(args);
         new BucketSort().main(args);
+        new RadixSort().main(args);
+        new ShellSort().main(args);
         // Test data structures.
         CircularLinkedList.main(args);
         KeyValuePair.main(args);
@@ -47,6 +49,8 @@ public class Test {
         PriorityDequeuer.main(args);
         PriorityEnqueuer.main(args);
         MinHeap.main(args);
+        TreeSet.main(args);
+        VectorSet.main(args);
         /* Call additional main routines as you create new data strutures. */
 
         return true;
