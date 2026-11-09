@@ -51,6 +51,7 @@ public class Test {
         MinHeap.main(args);
         TreeSet.main(args);
         VectorSet.main(args);
+        HashSet.main(args);
         /* Call additional main routines as you create new data strutures. */
 
         return true;
