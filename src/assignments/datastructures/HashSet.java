@@ -45,6 +45,7 @@ public class HashSet<T> implements Set<T> {
     /**
      * Creates an empty hash set.
      */
+    @SuppressWarnings("unchecked")
     public HashSet() {
         table = (Node[]) java.lang.reflect.Array.newInstance(
                 Node.class, INITIAL_CAPACITY);
