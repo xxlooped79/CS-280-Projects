@@ -4,14 +4,14 @@ import java.util.Random;
 import assignments.datastructures.VectorSet;
 import assignments.datastructures.TreeSet;
 import assignments.datastructures.HashSet;
-
 public class EraDemo {
 
     public static void main(String[] args) {
 
-        int[] sizes = {100, 1000, 10000, 100000};
-        int repeats = 10000;
+        int[] sizes = {10, 50, 100, 500, 1000, 2000,
+                       5000, 10000, 20000, 50000, 100000};
 
+        int repeats = 10000;
         Random random = new Random();
 
         System.out.println("Set,N,Time(ns)");
@@ -24,7 +24,7 @@ public class EraDemo {
                 numbers[i] = i + 1;
             }
 
-            // Put the numbers in random order.
+            // Put numbers in random order.
             for (int i = n - 1; i > 0; i--) {
                 int j = random.nextInt(i + 1);
 
@@ -48,7 +48,7 @@ public class EraDemo {
 
             long end = System.nanoTime();
 
-            System.out.println("VectorSet," + n + "," 
+            System.out.println("VectorSet," + n + ","
                     + (end - start) / repeats);
 
             // TreeSet
@@ -66,7 +66,7 @@ public class EraDemo {
 
             end = System.nanoTime();
 
-            System.out.println("TreeSet," + n + "," 
+            System.out.println("TreeSet," + n + ","
                     + (end - start) / repeats);
 
             // HashSet
@@ -84,7 +84,7 @@ public class EraDemo {
 
             end = System.nanoTime();
 
-            System.out.println("HashSet," + n + "," 
+            System.out.println("HashSet," + n + ","
                     + (end - start) / repeats);
         }
     }
