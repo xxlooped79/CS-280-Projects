@@ -1,93 +1,77 @@
 package assignments.algorithms;
 
 import java.util.Random;
-import assignments.sorting.*;
 
-/**
- * Measures how long eight sorting algorithms take
- * to sort arrays of random integers.
- *
- * The time used to create the arrays is not included.
- */
+import assignments.datastructures.VectorSet;
+import assignments.datastructures.TreeSet;
+import assignments.datastructures.HashSet;
+
 public class EraDemo {
 
-    /**
-     * Creates an array of random integers.
-     *
-     * @param n the number of elements
-     * @return an array with random numbers from 0 to n - 1
-     */
-    public static Integer[] randomArray(int n) {
-        Random random = new Random();
-        Integer[] array = new Integer[n];
-
-        for (int i = 0; i < n; i++) {
-            array[i] = random.nextInt(n);
-        }
-
-        return array;
-    }
-
-    /**
-     * Measures how long an algorithm takes to sort an array.
-     *
-     * @param algorithm the sorting algorithm
-     * @param n the size of the array
-     * @return the runtime in seconds
-     */
-    public static double timeSort(
-            SortingAlgorithm<Integer> algorithm, int n) {
-
-        Integer[] array = randomArray(n);
-
-        long start = System.nanoTime();
-
-        algorithm.sort(array);
-
-        long end = System.nanoTime();
-
-        return (end - start) / 1_000_000_000.0;
-    }
-
-    /**
-     * Runs all eight sorting algorithms and prints
-     * the results in CSV format.
-     *
-     * @param args command-line arguments
-     */
     public static void main(String[] args) {
 
-        System.out.println(
-            "N,Bubble,Insertion,Selection,Quick,Merge,Tree,Heap,Bucket"
-        );
+        int[] sizes = {100, 1000, 10000, 100000};
 
-        int[] sizes = {
-            100, 500, 1000, 2000,
-            4000, 8000, 16000, 32000
-        };
+        Random random = new Random();
+
+        System.out.println("Set,N,Time(ns)");
 
         for (int n : sizes) {
 
-            double bubble = timeSort(new BubbleSort(), n);
-            double insertion = timeSort(new InsertionSort(), n);
-            double selection = timeSort(new SelectionSort(), n);
-            double quick = timeSort(new QuickSort(), n);
-            double merge = timeSort(new MergeSort(), n);
-            double tree = timeSort(new TreeSort(), n);
-            double heap = timeSort(new HeapSort(), n);
-            double bucket = timeSort(new BucketSort(), n);
+            // Create numbers from 1 to N.
+            int[] numbers = new int[n];
 
-            System.out.println(
-                n + "," +
-                bubble + "," +
-                insertion + "," +
-                selection + "," +
-                quick + "," +
-                merge + "," +
-                tree + "," +
-                heap + "," +
-                bucket
-            );
+            for (int i = 0; i < n; i++) {
+                numbers[i] = i + 1;
+            }
+
+            // Put numbers in random order.
+            for (int i = n - 1; i > 0; i--) {
+                int j = random.nextInt(i + 1);
+
+                int temp = numbers[i];
+                numbers[i] = numbers[j];
+                numbers[j] = temp;
+            }
+
+            // Test VectorSet.
+            VectorSet<Integer> vector = new VectorSet<>();
+
+            for (int number : numbers) {
+                vector.add(number);
+            }
+
+            long start = System.nanoTime();
+            vector.contains(n + 1);
+            long end = System.nanoTime();
+
+            System.out.println("VectorSet," + n + "," + (end - start));
+
+            // Test TreeSet.
+            TreeSet<Integer> tree = new TreeSet<>();
+
+            for (int number : numbers) {
+                tree.add(number);
+            }
+
+            start = System.nanoTime();
+            tree.contains(n + 1);
+            end = System.nanoTime();
+
+            System.out.println("TreeSet," + n + "," + (end - start));
+
+            // Test HashSet.
+            HashSet<Integer> hash = new HashSet<>();
+
+            for (int number : numbers) {
+                hash.add(number);
+            }
+
+            start = System.nanoTime();
+            hash.contains(n + 1);
+            end = System.nanoTime();
+
+            System.out.println("HashSet," + n + "," + (end - start));
         }
     }
 }
